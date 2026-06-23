@@ -2,6 +2,7 @@
 положить папку ui в корень с вашей игрой/приложением
 
 ### Минимальный пример
+<img width="802" height="632" alt="image" src="https://github.com/user-attachments/assets/670092f9-664a-4b60-8926-b2cfebc00b05" />
 
 ```lua
 local ui = require('ui')
