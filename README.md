@@ -4,36 +4,52 @@
 ### Минимальный пример
 
 ```lua
+local ui = require('ui')
+
+local root
+local tree
+
 function love.load()
     root = ui.container()
-    root:size_full()
-    root:background(30, 30, 45, 255)
-    root:layout_column()
-    root:align_items('center')
-    root:justify_content('center')
-    root:spacing(20)
-
-    local heading = ui.heading('ui test', 1)
-    root:add(heading)
-
-    checkbox = ui.checkbox(false, 'turbo mode')
-    root:add(checkbox)
-
-    slider = ui.slider(0.5)
-    slider:width(200)
-    root:add(slider)
-
-    status_text = ui.text('click to apply', {font_size = 16})
-
-    local button = ui.button('apply settings')
-    button:size(160, 40)
-    button:on_click(function()
-        local is_turbo = ui.is_checked(checkbox)
-        local speed = ui.get_slider_value(slider)
-        status_text:text('turbo: ' .. tostring(is_turbo) .. '\nspeed: ' .. string.format('%.2f', speed))
-    end)
-    root:add(button)
-    root:add(status_text)
+        :size_full()
+        :background(30, 30, 30, 255)
+        :layout_column()
+        :align_items('center')
+        :justify_content('center')
+        :add(
+            ui.container()
+                :layout_column()
+                :align_items('center')
+                :gap(10)
+                :padding(10)
+                :background(100, 100, 100, 255)
+                :add(
+                    ui.text('hello, ui!')
+                        :font_bold()
+                        :font_size(26)
+                )
+                :add(
+                    ui.container()
+                        :layout_column()
+                        :padding(10)
+                        :border_radius(100)
+                        :align_items('center')
+                        :background(255, 0, 0, 255)
+                        :add(
+                            ui.container()
+                                :layout_column()
+                                :padding(10)
+                                :background(0, 255, 0, 255)
+                                :border_radius(100)
+                                :add(
+                                    ui.container()
+                                        :size(10, 10)
+                                        :background(0, 0, 255, 255)
+                                        :border_radius(100)
+                                )
+                        )
+                )
+        )
 
     tree = ui.tree(root)
 end
@@ -44,13 +60,5 @@ end
 
 function love.draw()
     tree:draw()
-end
-
-function love.mousemoved(x, y, dx, dy)
-    tree:mousemoved(x, y, dx, dy)
-end
-
-function love.mousepressed(x, y, button)
-    tree:mousepressed(x, y, button)
 end
 ```
